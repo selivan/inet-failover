@@ -12,7 +12,7 @@ PING_COUNT=5
 PING_TIMEOUT=1
 # maximum allowed loss percent
 LOSS_LIMIT=30
-CHECK_GAP=5
+CHECK_GAP=60
 
 LOG_FILE=/var/log/inet-failover.log
 STATE_FILE=/var/run/inet-failover
