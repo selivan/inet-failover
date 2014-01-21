@@ -1,0 +1,49 @@
+#!/bin/bash
+#set -x
+
+table=$1
+# may be omitted
+mode=$2
+
+test -z "$table" && echo "No table number given" && exit 1
+test -z "$IFACE" && echo "IFACE not specified" && exit 2
+
+# Get ip address, if not specified (dhcp or ppp may have dynamicaly-assigned address)
+get_ipaddr() {
+if [ -z "$IP_ADDRESS" ]; then
+	IP_ADDRESS=$(ip addr show $IFACE | egrep 'inet[^6]' | head -1 | tr -s ' ' | cut -d' ' -f 3 | cut -d/ -f1)
+fi
+if [ -z "$IP_ADDRESS" ]; then
+	echo "Failed to get ip address"
+	return 1;
+else return 0;
+fi
+}
+
+# Clear rules and table
+clear_rt() {
+ip rule list | fgrep "lookup $table" | cut -d: -f 2 | while read i; do
+	ip rule del $i
+done
+ip route flush table $table
+}
+
+# Create rules and table
+create_rt() {
+ip route show dev $IFACE | while read i; do
+	ip route add $i dev $IFACE table $table
+	echo $?
+done
+ip rule add from $IP_ADDRESS lookup $table
+}
+
+if [ "$mode" = "down" ]; then
+	clear_rt
+else
+	get_ipaddr || exit 3
+	clear_rt
+	create_rt
+fi
+
+exit 0
+
