@@ -13,6 +13,7 @@ I've often seen such setups, each time reinventing the wheel. So I decided to wr
  * Log file. Both links are monitored, even if only one is used as default.
 
 # NOT SUPPORTED
- * Work with 2 providers on 1 interfaces with aliases: eth0:0 eth0:1
- * Work with default route with load balancing - smth. like "nexthop via $IP1 dev $IFACE1 weight 1 nexthop via $IP2 dev $IFACE2 weight 1"
+ * Work with 2 providers on 1 interfaces with aliases: `eth0:0` `eth0:1`
+ * Work with default route with load balancing - smth. like `nexthop via $IP1 dev $IFACE1 weight 1 nexthop via $IP2 dev $IFACE2 weight 1`
 
+**P.S.** If this code is useful for you - don't forget to put a star on it's [github repo](https://github.com/selivan/inet-failover).
