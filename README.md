@@ -1,5 +1,5 @@
 # DESCRIPTION
-This scripts and config for /etc/network/interfaces allows to use internet from 2 providers simultaneously. Server is avaliable outside from both addresses. Script is used to switch default route if it fails.
+This scripts and config for `/etc/network/interfaces` allows to use internet from 2 providers simultaneously. Server is avaliable outside from both addresses. Script is used to switch default route if it fails.
 
 I've often seen such setups, each time reinventing the wheel. So I decided to write and share some more common solution for Debian/Ubuntu systems. May be adopted for CentOS/RedHat.
 
